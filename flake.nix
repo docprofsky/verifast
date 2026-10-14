@@ -49,12 +49,11 @@
 
         # pinned version of z3 from a specific nixpkgs revision, with override needed to get ocaml bindings.
         z3 =
-          (pkgsZ3.z3_4_8_5.override {
+          (pkgsZ3.z3_4_8.override {
             ocamlBindings = true;
             inherit (ocamlPackages) ocaml findlib zarith;
           }).overrideAttrs
             (prev: {
-              propagatedBuildInputs = (prev.propagatedBuildInputs or [ ]) ++ [ ocamlPackages.num ];
               doCheck = false;
             });
 

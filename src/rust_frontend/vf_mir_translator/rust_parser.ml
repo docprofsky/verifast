@@ -133,7 +133,7 @@ let rec parse_type = function%parser
     ];
     (_, Kwd "]")
   ] -> tp
-| [ (l, Int (n, _, _, _, _)) ] -> LiteralConstTypeExpr (l, Z.of_big_int n)
+| [ (l, Int (n, _, _, _, _)) ] -> LiteralConstTypeExpr (l, Zstr.of_big_int n)
 | [ (l, Kwd "<"); parse_type as t; (_, Kwd "as"); parse_type as trait; (_, Kwd ">"); (l, Kwd "::"); (_, Ident x) ] ->
   begin match trait with
     IdentTypeExpr (ltrait, None, trait_name) ->
