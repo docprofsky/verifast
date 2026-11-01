@@ -34,7 +34,6 @@ dl_and_unzip_llvm-clang() {
 }
 
 script_dir=$(pwd)
-  dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc1/$VFDEPS_NAME-linux.txz b9b8747c52be764784c6aba79b81c5c76e41e30e0a4bfee1927d41b50e4d32e9
 
 if [ $(uname -s) = "Linux" ]; then
   sudo apt-get update
@@ -59,6 +58,7 @@ if [ $(uname -s) = "Linux" ]; then
 
   cd /
   dl_and_unzip_llvm-clang Linux 7bc39ea82589679a10a4d03cbd7e1d032fffb644774aff60a46bdf973171ef7a
+  dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc1/$VFDEPS_NAME-linux.txz b9b8747c52be764784c6aba79b81c5c76e41e30e0a4bfee1927d41b50e4d32e9
   . "$script_dir/install-vfdeps.sh"
 
   cd $script_dir/src/cxx_frontend/ast_exporter
