@@ -62,7 +62,8 @@ if [ $(uname -s) = "Linux" ]; then
   . "$script_dir/install-vfdeps.sh"
 
   cd $script_dir/src/cxx_frontend/ast_exporter
-  cmake -S . -B build -G Ninja -DLLVM_INSTALL_DIR=/tmp/vf-llvm-clang-build-$VF_LLVM_CLANG_BUILD_VERSION -DVFDEPS=/tmp/$VFDEPS_NAME -DCMAKE_BUILD_TYPE=Release
+  ls -la "/tmp/${VFDEPS_NAME}/lib/cmake/CapnProto"
+  cmake -S . -B build -G Ninja -DLLVM_INSTALL_DIR=/tmp/vf-llvm-clang-build-$VF_LLVM_CLANG_BUILD_VERSION -DVFDEPS=/tmp/$VFDEPS_NAME -DCMAKE_BUILD_TYPE=Release || (echo cmake failed; cat build/CMakeCache.txt; exit 1)
 
   sudo apt-get install -y --no-install-recommends libcoq-iris || echo "Skipping libcoq-iris installation; may not be available for your Ubuntu version."
 
