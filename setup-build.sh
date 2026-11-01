@@ -58,7 +58,7 @@ if [ $(uname -s) = "Linux" ]; then
 
   cd /
   dl_and_unzip_llvm-clang Linux 7bc39ea82589679a10a4d03cbd7e1d032fffb644774aff60a46bdf973171ef7a
-  dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-linux.txz 8d022c93d51a1d13ec1e782d767c60462405f6865d5ee416f82d6234e93ee580
+  dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc2/$VFDEPS_NAME-linux.txz e81a1e5b81641ac3c9caee475caf192c9ce1d9b3eb5134821213b1855cc60855
   . "$script_dir/install-vfdeps.sh"
 
   cd $script_dir/src/cxx_frontend/ast_exporter
@@ -88,6 +88,7 @@ elif [ $(uname -s) = "Darwin" ]; then
     oras pull ghcr.io/homebrew/core/gtksourceview:2.10.5_7@sha256:0511545c79d16ff872f2bbc931abcdd5c1b4f3d70b71064f7d59989f68c8c073
     HOMEBREW_DEVELOPER=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 brew install ./gtksourceview--2.10.5_7.arm64_monterey.bottle.tar.gz
   else
+    exit 1 # Vfdeps isn't building on x86_64 macOS right now.
     oras pull ghcr.io/homebrew/core/gtksourceview:2.10.5_7@sha256:368413983346081e277782a5df7ac4b9e9ad1adce149fa7028fa6d99e809b7ae
     HOMEBREW_DEVELOPER=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 brew install ./gtksourceview--2.10.5_7.monterey.bottle.tar.gz
   fi
@@ -106,7 +107,7 @@ elif [ $(uname -s) = "Darwin" ]; then
   cd /usr/local
   if [ "$(uname -p)" = arm ]; then
     dl_and_unzip_llvm-clang MacOS-aarch64 aabb08b2d0f8226161fa7cec60746670c7e1ab4c69cedfdd76a47c52b329bc09
-    dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-macos-aarch64.txz 8bd48b02aa1887321d28b8490fe5803ea045845324f5d2adf49e72ddb6643bc1
+    dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc2/$VFDEPS_NAME-macos-aarch64.txz fbae39b52dbab0c10fc3a5b321f6ed20988a95594bc712f51f1c15c37399fc46
   else
     dl_and_unzip_llvm-clang MacOS 92d595ac8c92a2c28ca13a152463c52c12fc900d32d283558a885a29e8f250a5
     dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-macos.txz 99d9eceb2f4e483a61d84015db5251c99d4ce3932535b4b4e4d37a23d0a0146d
