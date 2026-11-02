@@ -1383,9 +1383,9 @@ module Make (Args : VF_MIR_TRANSLATOR_ARGS) = struct
               let v = DecoderAux.uint128_get data in
               begin match ty, size with
                 {kind=UInt _}, _ ->
-                  Ast.LiteralConstTypeExpr (loc, Z.of_uint128 v)
+                  Ast.LiteralConstTypeExpr (loc, Zstr.of_uint128 v)
               | {kind=Bool}, 1 ->
-                  Ast.LiteralConstTypeExpr (loc, Z.of_uint128 v)
+                  Ast.LiteralConstTypeExpr (loc, Zstr.of_uint128 v)
               | {kind=Int _}, _ ->
                   (* Sign-extend the [size]-byte two's-complement value. *)
                   let bits = 8 * size in
@@ -1395,7 +1395,7 @@ module Make (Args : VF_MIR_TRANSLATOR_ARGS) = struct
                       Stdint.Int128.shift_right (Stdint.Int128.shift_left i (128 - bits)) (128 - bits)
                     else i
                   in
-                  Ast.LiteralConstTypeExpr (loc, Z.of_int128 i)
+                  Ast.LiteralConstTypeExpr (loc, Zstr.of_int128 i)
               | _ -> 
                   failwith "Unsupported constant type or size"
               end
@@ -1814,7 +1814,7 @@ module Make (Args : VF_MIR_TRANSLATOR_ARGS) = struct
     in
     let vf_ty =
       Ast.StaticArrayTypeExpr
-        (loc, elem_ty, LiteralConstTypeExpr (loc, Z.of_big_int len))
+        (loc, elem_ty, LiteralConstTypeExpr (loc, Zstr.of_big_int len))
     in
     let size = Ast.SizeofExpr (loc, TypeExpr vf_ty) in
     let own tid vs =

@@ -5973,11 +5973,11 @@ module VerifyProgram1(VerifyProgramArgs: VERIFY_PROGRAM_ARGS) = struct
     let rec check e tp =
     match tp, e with
     | StaticArrayType (Int (Signed, CharRank), LiteralConstType n), StringLit (ls, s) ->
-      let n = Z.to_int n in
+      let n = Zstr.to_int n in
       if String.length s + 1 > n then static_error ls "String literal does not fit inside character array." None;
       e
     | StaticArrayType (elemTp, LiteralConstType elemCount), InitializerList (ll, es) ->
-      let elemCount = Z.to_int elemCount in
+      let elemCount = Zstr.to_int elemCount in
       let rec iter n es =
         match es with
           [] -> []
@@ -6415,7 +6415,7 @@ module VerifyProgram1(VerifyProgramArgs: VERIFY_PROGRAM_ARGS) = struct
     let t0_typeid = typeid_of_core_core l msg env t0 in
     mk_rust_ref_typeid lft_typeid kind t0_typeid
   | StaticArrayType (elemTp, n) -> mk_array_typeid (typeid_of_core_core l msg env elemTp) (eval_const_type_core l msg env n)
-  | LiteralConstType n -> mk_app (const_of_int_symb ()) [ctxt#mk_intlit_of_string (Z.to_string n)]
+  | LiteralConstType n -> mk_app (const_of_int_symb ()) [ctxt#mk_intlit_of_string (Zstr.to_string n)]
   | Bool -> bool_typeid_term
   | Float -> float_typeid_term
   | Double -> double_typeid_term
@@ -6464,7 +6464,7 @@ module VerifyProgram1(VerifyProgramArgs: VERIFY_PROGRAM_ARGS) = struct
   | tp -> static_error l (Printf.sprintf "%sTaking the typeid of type '%s' is not yet supported" (msg ()) (string_of_type tp)) None
   and eval_const_type_core l msg env t =
     match t with
-      LiteralConstType n -> ctxt#mk_intlit_of_string (Z.to_string n)
+      LiteralConstType n -> ctxt#mk_intlit_of_string (Zstr.to_string n)
     | _ -> mk_app (int_of_const_symb ()) [typeid_of_core_core l msg env t]
 
   let no_msg _ = ""
@@ -6858,11 +6858,11 @@ module VerifyProgram1(VerifyProgramArgs: VERIFY_PROGRAM_ARGS) = struct
                   end;
                   begin match wend with
                     None -> ()
-                  | Some (LitPat (WIntLit (_, n))) when eq_big_int n (Z.to_big_int elemCount) -> ()
-                  | _ -> static_error lslice (Printf.sprintf "End of slice, if specified, must equal array size (%d)" (Z.to_int elemCount)) None
+                  | Some (LitPat (WIntLit (_, n))) when eq_big_int n (Zstr.to_big_int elemCount) -> ()
+                  | _ -> static_error lslice (Printf.sprintf "End of slice, if specified, must equal array size (%d)" (Zstr.to_int elemCount)) None
                   end;
                   let elemtype, multiplier = check_slices elemtype wslices in
-                  elemtype, multiplier * Z.to_int elemCount
+                  elemtype, multiplier * Zstr.to_int elemCount
                 | _ ->
                   static_error lslice (Printf.sprintf "Cannot use a slice here to subscript an expression of type %s; array type expected" (string_of_type elemtype)) None
             in
