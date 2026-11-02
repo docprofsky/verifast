@@ -1,2 +1,2 @@
-export VFDEPS_NAME=vfdeps-adf88dc
+export VFDEPS_NAME=vfdeps-867918d
 export VF_LLVM_CLANG_BUILD_VERSION=5710e1b

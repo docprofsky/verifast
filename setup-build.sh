@@ -58,7 +58,7 @@ if [ $(uname -s) = "Linux" ]; then
 
   cd /
   dl_and_unzip_llvm-clang Linux 7bc39ea82589679a10a4d03cbd7e1d032fffb644774aff60a46bdf973171ef7a
-  dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-linux.txz 8d022c93d51a1d13ec1e782d767c60462405f6865d5ee416f82d6234e93ee580
+  dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc4/$VFDEPS_NAME-linux.txz 7f00c7e411f0ffb40e6b00490d29369fa3cd37c281b87fc7695b2a9c6b276738
   . "$script_dir/install-vfdeps.sh"
 
   cd $script_dir/src/cxx_frontend/ast_exporter
@@ -106,10 +106,10 @@ elif [ $(uname -s) = "Darwin" ]; then
   cd /usr/local
   if [ "$(uname -p)" = arm ]; then
     dl_and_unzip_llvm-clang MacOS-aarch64 aabb08b2d0f8226161fa7cec60746670c7e1ab4c69cedfdd76a47c52b329bc09
-    dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-macos-aarch64.txz 8bd48b02aa1887321d28b8490fe5803ea045845324f5d2adf49e72ddb6643bc1
+    dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc4/$VFDEPS_NAME-macos-aarch64.txz 58df31bc8279104e915d3a6e714c5d609b101e0416fa3bbfbc3116e84af862be
   else
     dl_and_unzip_llvm-clang MacOS 92d595ac8c92a2c28ca13a152463c52c12fc900d32d283558a885a29e8f250a5
-    dl_and_unzip_vfdeps https://github.com/verifast/vfdeps/releases/download/25.01/$VFDEPS_NAME-macos.txz 99d9eceb2f4e483a61d84015db5251c99d4ce3932535b4b4e4d37a23d0a0146d
+    dl_and_unzip_vfdeps https://github.com/docprofsky/vfdeps/releases/download/26.10rc4/$VFDEPS_NAME-macos.txz 4e12c7ae06ac861b6e27ce412e3ba5f443e6e47ebc98fcde62f2feba4b47892d
   fi
 
   cd $script_dir/src/cxx_frontend/ast_exporter
